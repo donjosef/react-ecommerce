@@ -1,9 +1,12 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
-import ShoppingCart from '@material-ui/icons/ShoppingCart';
-import { withStyles } from '@material-ui/core/styles';
+import SideNav from '../SideNav';
 
-const styles = {
+import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
+import { ShoppingCart, Menu } from '@material-ui/icons';
+import { withStyles } from '@material-ui/core/styles';
+import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
+
+const styles = theme => ({
     root: {
         flexGrow: 1
     },
@@ -18,9 +21,25 @@ const styles = {
     grow: {
         flexGrow: 1
     }
-};
+});
 
-const Header = ({classes}) => {
+const Header = ({ classes }) => {
+    const isMobile = useMediaQuery('(max-width: 500px)');
+
+    let visibleButtons = (
+        <>
+            <Button className={classes.btnHov} color="inherit" component="a">Contacts</Button>
+            <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
+            <IconButton className={classes.btnHov} color="inherit">
+                <ShoppingCart />
+            </IconButton>
+        </>
+    );
+
+    if (isMobile) {
+        visibleButtons = <SideNav />
+    }
+
     return (
         <header className={classes.root}>
             <AppBar className={classes.barBg} position="static">
@@ -28,15 +47,11 @@ const Header = ({classes}) => {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         My ecommerce
                     </Typography>
-                    <Button className={classes.btnHov} color="inherit" component="a">Contacts</Button>
-                    <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
-                    <IconButton className={classes.btnHov} color="inherit">
-                        <ShoppingCart />
-                    </IconButton>
+                    {visibleButtons}
                 </Toolbar>
             </AppBar>
         </header>
     )
 }
 
-export default withStyles(styles)(Header);
+export default withStyles(styles)(Header)
