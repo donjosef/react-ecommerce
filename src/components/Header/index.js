@@ -10,6 +10,11 @@ const styles = {
     barBg: {
         background: 'black'
     },
+    btnHov: {
+        '&:hover': {
+            background: 'rgba(255,255,255, 0.1)'
+        }
+    },
     grow: {
         flexGrow: 1
     }
@@ -23,9 +28,9 @@ const Header = ({classes}) => {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         My ecommerce
                     </Typography>
-                    <Button color="inherit" component="a">Contacts</Button>
-                    <Button color="inherit" component="a">Shop/Products</Button>
-                    <IconButton color="inherit">
+                    <Button className={classes.btnHov} color="inherit" component="a">Contacts</Button>
+                    <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
+                    <IconButton className={classes.btnHov} color="inherit">
                         <ShoppingCart />
                     </IconButton>
                 </Toolbar>
