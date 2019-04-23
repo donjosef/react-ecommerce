@@ -48,7 +48,7 @@ const Header = ({ classes }) => {
 
     return (
         <header className={classes.root}>
-            <AppBar className={classes.barBg} position="static">
+            <AppBar className={classes.barBg}>
                 <Toolbar>
                     <Typography variant="h5" color="inherit" className={classes.grow}>
                         My ecommerce
