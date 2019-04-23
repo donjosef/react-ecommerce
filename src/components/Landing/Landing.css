@@ -1,10 +1,10 @@
-.watch-transition-container {
+.watch-transition {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.watch-transition {
+.watch-transition__image {
     width: 50%;
 }
 

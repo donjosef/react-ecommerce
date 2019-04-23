@@ -146,7 +146,7 @@ const Landing = ({ classes }) => {
                                 style={{ background: 'black', color: 'white' }}
                                 variant="contained"
                                 size="large">
-                                Discover
+                                View Products
                             </Button>
                         </div>
                     </Paper>
@@ -154,9 +154,9 @@ const Landing = ({ classes }) => {
                 <Grid item xs={12} sm={12} md={6}>
                     <Paper className={classes.paperTransitionWatch} square elevation={0}>
                         <Reveal effect="reveal" delay={500}>
-                            <div className="watch-transition-container">
+                            <div className="watch-transition">
                                 <Fade top delay={1200}>
-                                    <img className="watch-transition" src={watchTransition} />
+                                    <img className="watch-transition__image" src={watchTransition} />
                                 </Fade>
                             </div>
                         </Reveal>
