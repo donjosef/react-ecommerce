@@ -44,7 +44,7 @@ const Header = ({ classes }) => {
         <header className={classes.root}>
             <AppBar className={classes.barBg} position="static">
                 <Toolbar>
-                    <Typography variant="h6" color="inherit" className={classes.grow}>
+                    <Typography variant="h5" color="inherit" className={classes.grow}>
                         My ecommerce
                     </Typography>
                     {visibleButtons}
