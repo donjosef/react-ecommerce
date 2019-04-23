@@ -46,7 +46,7 @@ class SideNav extends Component {
                 <IconButton onClick={this.toggleDrawer}>
                     <Menu style={{ color: 'white' }} />
                 </IconButton>
-                <Drawer anchor="right" open={this.state.open} onClose={this.toggleDrawer}>
+                <Drawer anchor="left" open={this.state.open} onClose={this.toggleDrawer}>
                     <div
                         tabIndex={0}
                         role="button"
