@@ -28,7 +28,13 @@ const Header = ({ classes }) => {
 
     let visibleButtons = (
         <>
-            <Button className={classes.btnHov} color="inherit" component="a">Contacts</Button>
+            <Button 
+                className={classes.btnHov} 
+                color="inherit" 
+                component="a"
+                href="#contacts">
+                Contacts
+            </Button>
             <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
             <IconButton className={classes.btnHov} color="inherit">
                 <ShoppingCart />
