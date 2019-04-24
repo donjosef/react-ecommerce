@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Grid, Button, Typography, Paper, List, ListItem, ListItemText } from '@material-ui/core';
-import Form from './Form';
 import Fade from 'react-reveal/Fade';
 import Reveal from 'react-reveal/Reveal';
 import { withStyles } from '@material-ui/core/styles';
@@ -172,7 +171,6 @@ class Landing extends Component {
                         </Paper>
                     </Grid>
                 </Grid>
-                <Form />
             </main>
         )
     }  
