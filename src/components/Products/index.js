@@ -17,7 +17,7 @@ const effects = ['toLeft', 'toRight', 'toTop', 'toBottom'];
 
 const Products = ({ classes }) => {
     return (
-        <Grid container>
+        <Grid container style={{marginTop: 64}}>
             {products.map((product, index) => {
                 const random = Math.floor(Math.random() * effects.length);
                 return (
