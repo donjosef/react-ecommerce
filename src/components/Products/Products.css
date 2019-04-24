@@ -34,4 +34,71 @@
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
+    align-items: flex-start;
+}
+
+/*Transition of product background*/
+
+.toRight {
+    animation-name: toRight;
+    animation-fill-mode: forwards;
+    transform-origin: left;
+}
+
+@keyframes toRight {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+       transform: scaleX(1);
+    }
+}
+
+.toLeft {
+    animation-name: toLeft;
+    animation-fill-mode: forwards;
+    transform-origin: right;
+}
+
+@keyframes toLeft {
+    0% {
+        transform: scaleX(0);
+    }
+
+    100% {
+       transform: scaleX(1);
+    }
+}
+
+.toBottom {
+    animation-name: toBottom;
+    animation-fill-mode: forwards;
+    transform-origin: top;
+}
+
+@keyframes toBottom {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+       transform: scaleY(1);
+    }
+}
+
+.toTop {
+    animation-name: toTop;
+    animation-fill-mode: forwards;
+    transform-origin: bottom;
+}
+
+@keyframes toTop {
+    0% {
+        transform: scaleY(0);
+    }
+
+    100% {
+       transform: scaleY(1);
+    }
 }
