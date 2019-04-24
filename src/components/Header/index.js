@@ -16,8 +16,10 @@ const styles = theme => ({
             background: 'rgba(255,255,255, 0.1)'
         }
     },
+    grow: {
+        flexGrow: 1
+    },
     link: {
-        flexGrow: 1,
         textDecoration: 'none',
         color: 'white'
     }
@@ -35,7 +37,12 @@ const Header = ({ classes }) => {
                 href="#newsletter">
                 Newsletter
             </Button>
-            <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
+            <Link to="/products" className={classes.link}>
+                <Button
+                    className={classes.btnHov}
+                    color="inherit">Shop/Products
+                </Button>
+            </Link>
             <IconButton className={classes.btnHov} color="inherit">
                 <ShoppingCart />
             </IconButton>
@@ -49,7 +56,7 @@ const Header = ({ classes }) => {
     return (
         <AppBar classes={{ root: classes.root }} >
             <Toolbar>
-                <Link to="/" className={classes.link}>
+                <Link to="/" className={`${classes.link} ${classes.grow}`}>
                     <Typography variant="h5" color="inherit">
                         My ecommerce
                     </Typography>
