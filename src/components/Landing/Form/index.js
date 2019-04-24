@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import './Form.css';
 
@@ -55,7 +55,8 @@ class Form extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <section className="contacts" id="contacts">
+            <section className="newsletter" id="newsletter">
+                <Typography style={{textAlign: 'center'}} variant="h4">Newsletter</Typography>
                 <form className={classes.container}>
                     <TextField
                         InputProps={{
