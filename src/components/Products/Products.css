@@ -1,0 +1,37 @@
+.bg-product-transition,
+.product-image,
+.product-details {
+    position: absolute;
+    height: 100%;
+}
+
+.bg-product-transition {
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+/*Cntainer of image*/
+.product-image {
+    width: 40%;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+/*Child */
+.product-image__image {
+    max-width: 100%;
+}
+
+.product-details {
+    width: 60%;
+    color: white;
+    padding: 1.2em;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
