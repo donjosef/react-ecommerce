@@ -8,9 +8,7 @@ import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMe
 
 const styles = theme => ({
     root: {
-        flexGrow: 1
-    },
-    barBg: {
+        flexGrow: 1,
         background: 'black'
     },
     btnHov: {
@@ -28,9 +26,9 @@ const Header = ({ classes }) => {
 
     let visibleButtons = (
         <>
-            <Button 
-                className={classes.btnHov} 
-                color="inherit" 
+            <Button
+                className={classes.btnHov}
+                color="inherit"
                 component="a"
                 href="#contacts">
                 Contacts
@@ -47,16 +45,14 @@ const Header = ({ classes }) => {
     }
 
     return (
-        <header className={classes.root}>
-            <AppBar className={classes.barBg}>
-                <Toolbar>
-                    <Typography variant="h5" color="inherit" className={classes.grow}>
-                        My ecommerce
+        <AppBar classes={{root: classes.root}} >
+            <Toolbar>
+                <Typography variant="h5" color="inherit" className={classes.grow}>
+                    My ecommerce
                     </Typography>
-                    {visibleButtons}
-                </Toolbar>
-            </AppBar>
-        </header>
+                {visibleButtons}
+            </Toolbar>
+        </AppBar>
     )
 }
 
