@@ -30,8 +30,8 @@ const Header = ({ classes }) => {
                 className={classes.btnHov}
                 color="inherit"
                 component="a"
-                href="#contacts">
-                Contacts
+                href="#newsletter">
+                Newsletter
             </Button>
             <Button className={classes.btnHov} color="inherit" component="a">Shop/Products</Button>
             <IconButton className={classes.btnHov} color="inherit">
