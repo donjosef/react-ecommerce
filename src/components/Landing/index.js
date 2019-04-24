@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Grid, Button, Typography, Paper, List, ListItem, ListItemText } from '@material-ui/core';
 import Form from './Form';
 import Fade from 'react-reveal/Fade';
@@ -64,108 +64,118 @@ const styles = theme => ({
     }
 });
 
-const Landing = ({ classes }) => {
-    return (
-        <main>
-            <Grid container>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper className={`${classes.paper} ${classes.paperIntro}`} square elevation={0}>
-                        <Typography gutterBottom variant="h3">Best Clocks</Typography>
-                        <Button
-                            style={{ background: 'black', color: 'white' }}
-                            variant="contained"
-                            size="medium">
-                            Discover
-                        </Button>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper
-                        className={`${classes.paperImage} ${classes.parallax}`}
-                        square
-                        elevation={0}>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper
-                        className={`${classes.paperImage} ${classes.paperWatches}`}
-                        square
-                        elevation={0}>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper style={{ background: '#E5DBD6' }} className={classes.paper} square elevation={0}>
-                        <div style={{ width: '100%' }}>
-                            <Fade right>
-                                <Typography variant="h4" gutterBottom>
-                                    Rewriting an old story
-                                </Typography>
-                                <Typography variant="h6">
-                                    Best Clocks believes in the cult of individualism. From stylish sports to bold fashion statements, the Best Clocks range combines unique features and gadgets with a wide range of colours and shapes. Best Clocks continually seeks stimulation for new challenges in design. Best Clock's team of dedicated designers take inspiration from the world around them, combining unconventional materials together with precision instrumentation.
-                                </Typography>
-                            </Fade>
-                        </div>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper className={classes.paper} square elevation={0}>
-                        <div style={{ width: '100%' }}>
-                            <Fade left delay={500}>
-                                <Typography style={{ width: '100%' }} align="left" variant="h4">
-                                    Features
-                                </Typography>
-                                <List style={{ width: '100%' }}>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText
-                                            classes={{ primary: classes.listItemText }}
-                                            primary="Original" />
-                                    </ListItem>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText
-                                            classes={{ primary: classes.listItemText }}
-                                            primary="Excellents materials" />
-                                    </ListItem>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText
-                                            classes={{ primary: classes.listItemText }}
-                                            primary="Cool Design" />
-                                    </ListItem>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText
-                                            classes={{ primary: classes.listItemText }}
-                                            primary="Quality" />
-                                    </ListItem>
-                                    <ListItem className={classes.listItem}>
-                                        <ListItemText
-                                            classes={{ primary: classes.listItemText }}
-                                            primary="Cheap" />
-                                    </ListItem>
-                                </List>
-                            </Fade>
+class Landing extends Component {
+
+    goToProducts = () => {
+        this.props.history.push('/products');
+    }
+
+    render() {
+        const { classes } = this.props;
+        return (
+            <main>
+                <Grid container>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper className={`${classes.paper} ${classes.paperIntro}`} square elevation={0}>
+                            <Typography gutterBottom variant="h3">Best Watches</Typography>
                             <Button
                                 style={{ background: 'black', color: 'white' }}
                                 variant="contained"
-                                size="large">
-                                View Products
+                                size="medium"
+                                onClick={this.goToProducts}>
+                                Discover
                             </Button>
-                        </div>
-                    </Paper>
-                </Grid>
-                <Grid item xs={12} sm={12} md={6}>
-                    <Paper className={classes.paperTransitionWatch} square elevation={0}>
-                        <Reveal effect="reveal" delay={500}>
-                            <div className="watch-transition">
-                                <Fade top delay={1200}>
-                                    <img className="watch-transition__image" src={watchTransition} />
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper
+                            className={`${classes.paperImage} ${classes.parallax}`}
+                            square
+                            elevation={0}>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper
+                            className={`${classes.paperImage} ${classes.paperWatches}`}
+                            square
+                            elevation={0}>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper style={{ background: '#E5DBD6' }} className={classes.paper} square elevation={0}>
+                            <div style={{ width: '100%' }}>
+                                <Fade right>
+                                    <Typography variant="h4" gutterBottom>
+                                        Rewriting an old story
+                                    </Typography>
+                                    <Typography variant="h6">
+                                        Best Watches believes in the cult of individualism. From stylish sports to bold fashion statements, the Best Watches range combines unique features and gadgets with a wide range of colours and shapes. Best Watches continually seeks stimulation for new challenges in design. Best Clock's team of dedicated designers take inspiration from the world around them, combining unconventional materials together with precision instrumentation.
+                                    </Typography>
                                 </Fade>
                             </div>
-                        </Reveal>
-                    </Paper>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper className={classes.paper} square elevation={0}>
+                            <div style={{ width: '100%' }}>
+                                <Fade left delay={500}>
+                                    <Typography style={{ width: '100%' }} align="left" variant="h4">
+                                        Features
+                                    </Typography>
+                                    <List style={{ width: '100%' }}>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText
+                                                classes={{ primary: classes.listItemText }}
+                                                primary="Original" />
+                                        </ListItem>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText
+                                                classes={{ primary: classes.listItemText }}
+                                                primary="Excellents materials" />
+                                        </ListItem>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText
+                                                classes={{ primary: classes.listItemText }}
+                                                primary="Cool Design" />
+                                        </ListItem>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText
+                                                classes={{ primary: classes.listItemText }}
+                                                primary="Quality" />
+                                        </ListItem>
+                                        <ListItem className={classes.listItem}>
+                                            <ListItemText
+                                                classes={{ primary: classes.listItemText }}
+                                                primary="Cheap" />
+                                        </ListItem>
+                                    </List>
+                                </Fade>
+                                <Button
+                                    style={{ background: 'black', color: 'white' }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={this.goToProducts}>
+                                    View Products
+                                </Button>
+                            </div>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={6}>
+                        <Paper className={classes.paperTransitionWatch} square elevation={0}>
+                            <Reveal effect="reveal" delay={500}>
+                                <div className="watch-transition">
+                                    <Fade top delay={1200}>
+                                        <img className="watch-transition__image" src={watchTransition} />
+                                    </Fade>
+                                </div>
+                            </Reveal>
+                        </Paper>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Form />
-        </main>
-    )
+                <Form />
+            </main>
+        )
+    }  
 }
 
 export default withStyles(styles)(Landing);
