@@ -1,6 +1,6 @@
 import React from 'react';
 import SideNav from '../SideNav';
-
+import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
 import { ShoppingCart, Menu } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,8 +16,10 @@ const styles = theme => ({
             background: 'rgba(255,255,255, 0.1)'
         }
     },
-    grow: {
-        flexGrow: 1
+    link: {
+        flexGrow: 1,
+        textDecoration: 'none',
+        color: 'white'
     }
 });
 
@@ -45,11 +47,13 @@ const Header = ({ classes }) => {
     }
 
     return (
-        <AppBar classes={{root: classes.root}} >
+        <AppBar classes={{ root: classes.root }} >
             <Toolbar>
-                <Typography variant="h5" color="inherit" className={classes.grow}>
-                    My ecommerce
+                <Link to="/" className={classes.link}>
+                    <Typography variant="h5" color="inherit">
+                        My ecommerce
                     </Typography>
+                </Link>
                 {visibleButtons}
             </Toolbar>
         </AppBar>
