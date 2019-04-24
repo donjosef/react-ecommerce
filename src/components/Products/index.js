@@ -39,7 +39,7 @@ class Products extends Component {
                                 <Reveal effect={effects[random]}>
                                     <div style={{
                                         background: `rgb(
-                                            ${Math.random() * (20 * index)}, ${Math.random() * (20 * index)}, ${Math.random() * (20 * index)}
+                                            ${Math.random() * 200}, ${Math.random() * 200}, ${Math.random() * 200}
                                         )`
                                     }} className="bg-product-transition"></div>
                                 </Reveal>
