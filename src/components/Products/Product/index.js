@@ -57,7 +57,7 @@ const Product = ({ classes, product }) => {
                         variant="body1">
                         Price: <strong>{product.price}</strong>
                     </Typography>
-                   <FullScreenDialog product={product} />
+                   <FullScreenDialog product={product} bgColor={`rgb(${red}, ${green}, ${blue})`}/>
                 </div>
             </Paper>
         </Grid>
