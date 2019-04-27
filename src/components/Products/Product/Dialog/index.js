@@ -12,6 +12,7 @@ import {
     Typography
 } from '@material-ui/core';
 import { Close, ShoppingCart } from '@material-ui/icons';
+import color from '@material-ui/core/colors/brown';
 
 const styles = theme => ({
     appBar: {
@@ -29,6 +30,7 @@ const styles = theme => ({
         height: 'calc(100vh - 64px)',
         overflowY: 'hidden',
         padding: 20,
+        color: 'white',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
@@ -67,7 +69,7 @@ class FullScreenDialog extends Component {
     }
 
     render() {
-        const { product, classes } = this.props;
+        const { product, classes, bgColor } = this.props;
 
         return (
             <>
@@ -98,7 +100,11 @@ class FullScreenDialog extends Component {
                     </AppBar>
                     <Grid container>
                         <Grid item md={6} sm={6} xs={12}>
-                            <Paper className={classes.paper} square elevation={2}>
+                            <Paper 
+                                style={{background: bgColor}} 
+                                className={classes.paper} 
+                                square 
+                                elevation={2}>
                                 <Typography
                                     color="inherit"
                                     gutterBottom
@@ -135,7 +141,11 @@ class FullScreenDialog extends Component {
                             </Paper>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12}>
-                            <Paper className={classes.paper} square elevation={2}>
+                            <Paper 
+                                style={{background: bgColor}}
+                                className={classes.paper} 
+                                square 
+                                elevation={2}>
                                 <img
                                     className={classes.img}
                                     src={product.thumbnail} />
