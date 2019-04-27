@@ -43,9 +43,11 @@ const Header = ({ classes }) => {
                     color="inherit">Shop/Products
                 </Button>
             </Link>
-            <IconButton className={classes.btnHov} color="inherit">
-                <ShoppingCart />
-            </IconButton>
+            <Link to="/cart" className={classes.link}>
+                <IconButton className={classes.btnHov} color="inherit">
+                    <ShoppingCart />
+                </IconButton>
+            </Link>
         </>
     );
 
