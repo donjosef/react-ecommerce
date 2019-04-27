@@ -14,6 +14,7 @@ class App extends Component {
     }
 
     render() {
+       const {location: {pathname}} = this.props;
         return (
             <div className="App">
                 <Layout>
@@ -26,7 +27,7 @@ class App extends Component {
                         )}
                     />
                 </Layout>
-                <Form />
+                {pathname !== '/cart' &&  <Form />}
             </div>
         )
     }
