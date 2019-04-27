@@ -19,7 +19,10 @@ const effects = ['toLeft', 'toRight', 'toTop', 'toBottom'];
 
 const Product = ({ classes, product }) => {
     const random = Math.floor(Math.random() * effects.length);
-
+    const red = Math.random() * 200;
+    const green = Math.random() * 200;
+    const blue = Math.random() * 200;
+    
     return (
         <Grid
             item
@@ -29,9 +32,7 @@ const Product = ({ classes, product }) => {
             <Paper className={classes.paper} square elevation={0}>
                 <Reveal effect={effects[random]}>
                     <div style={{
-                        background: `rgb(
-                            ${Math.random() * 200}, ${Math.random() * 200}, ${Math.random() * 200}
-                        )`
+                        background: `rgb(${red}, ${green}, ${blue})`
                     }} className="bg-product-transition"></div>
                 </Reveal>
                 <Fade left delay={500}>
