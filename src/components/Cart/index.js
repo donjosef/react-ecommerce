@@ -41,7 +41,7 @@ const styles = theme => ({
     }
 });
 
-const Cart = ({ cart, classes, onChangeQuantity, onDeleteProduct }) => {
+const Cart = ({ cart, classes, onChangeQuantity, onDeleteProduct, onOrderProduct }) => {
     //total of ALL watches
     const total = cart.reduce((acc, watch) => acc + (watch.quantity * watch.price), 0);
 
@@ -78,6 +78,7 @@ const Cart = ({ cart, classes, onChangeQuantity, onDeleteProduct }) => {
                     <br />
                     <Button
                         className={classes.button}
+                        onClick={onOrderProduct}
                         size="medium"
                         variant="contained">
                         Order

@@ -49,6 +49,13 @@ class App extends Component {
         }))
     }
 
+    handleOrderProduct = () => {
+        alert('Congratulations! Your order has been placed!');
+        this.setState({
+            cart: []
+        })
+    } 
+
     render() {
         const { location: { pathname } } = this.props;
         //quantity of products that will be in cart(the number next to the cart icon)
@@ -69,7 +76,8 @@ class App extends Component {
                             <Cart 
                                 cart={this.state.cart} 
                                 onChangeQuantity={this.handleChangeQuantity}
-                                onDeleteProduct={this.handleDeleteProduct}/>
+                                onDeleteProduct={this.handleDeleteProduct}
+                                onOrderProduct={this.handleOrderProduct}/>
                         )}
                     />
                 </Layout>
