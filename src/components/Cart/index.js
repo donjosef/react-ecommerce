@@ -41,7 +41,7 @@ const styles = theme => ({
     }
 });
 
-const Cart = ({ cart, classes, onChangeQuantity }) => {
+const Cart = ({ cart, classes, onChangeQuantity, onDeleteProduct }) => {
     //total of ALL watches
     const total = cart.reduce((acc, watch) => acc + (watch.quantity * watch.price), 0);
 
@@ -55,7 +55,7 @@ const Cart = ({ cart, classes, onChangeQuantity }) => {
                     <List className={classes.list}>
                         {cart.map(product => (
                             <ListItem key={product.id} className={classes.listItem}>
-                                <ListItemIcon>
+                                <ListItemIcon onClick={() => onDeleteProduct(product.name)}>
                                     <Delete />
                                 </ListItemIcon>
                                 <ListItemText primary="Name" secondary={product.name} />

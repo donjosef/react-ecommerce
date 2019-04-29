@@ -43,6 +43,12 @@ class App extends Component {
         }))
     }
 
+    handleDeleteProduct = (name) => {
+        this.setState(prevState => ({
+            cart: prevState.cart.filter(prod => prod.name !== name )
+        }))
+    }
+
     render() {
         const { location: { pathname } } = this.props;
         //quantity of products that will be in cart(the number next to the cart icon)
@@ -60,7 +66,10 @@ class App extends Component {
                     <Route
                         path='/cart'
                         render={() => (
-                            <Cart cart={this.state.cart} onChangeQuantity={this.handleChangeQuantity}/>
+                            <Cart 
+                                cart={this.state.cart} 
+                                onChangeQuantity={this.handleChangeQuantity}
+                                onDeleteProduct={this.handleDeleteProduct}/>
                         )}
                     />
                 </Layout>
