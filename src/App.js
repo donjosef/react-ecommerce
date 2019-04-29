@@ -34,6 +34,15 @@ class App extends Component {
         }
     }
 
+    handleChangeQuantity = (e, watch) => {
+        const target = e.target; //prevent nullifying of e object. The alternative will be to use e.persist()
+        this.setState(prevState => ({
+            cart: prevState.cart.map(prod => (
+                prod.name === watch.name ? {...prod, quantity: parseInt(target.value, 10)} : prod
+            ))
+        }))
+    }
+
     render() {
         const { location: { pathname } } = this.props;
         //quantity of products that will be in cart(the number next to the cart icon)
@@ -51,7 +60,7 @@ class App extends Component {
                     <Route
                         path='/cart'
                         render={() => (
-                            <Cart cart={this.state.cart}/>
+                            <Cart cart={this.state.cart} onChangeQuantity={this.handleChangeQuantity}/>
                         )}
                     />
                 </Layout>
