@@ -32,8 +32,7 @@ class SideNav extends Component {
                     <Link to='/products' style={{textDecoration: 'none', color: 'black'}}>
                         <Button
                             fullWidth
-                            color="inherit"
-                            component="a">
+                            color="inherit">
                             Shop/Products
                         </Button>
                     </Link>
