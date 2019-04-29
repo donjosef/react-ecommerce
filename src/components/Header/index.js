@@ -25,35 +25,52 @@ const styles = theme => ({
     }
 });
 
-const Header = ({ classes, quantity }) => {
+const Header = ({ classes, quantity, pathname }) => {
     const isMobile = useMediaQuery('(max-width: 500px)');
 
     let visibleButtons = (
-        <>
-            <Button
-                className={classes.btnHov}
-                color="inherit"
-                component="a"
-                href="#newsletter">
-                Newsletter
-            </Button>
-            <Link to="/products" className={classes.link}>
+        pathname !== '/cart' ? (
+            <>
                 <Button
                     className={classes.btnHov}
-                    color="inherit">Shop/Products
+                    color="inherit"
+                    component="a"
+                    href="#newsletter">
+                    Newsletter
                 </Button>
-            </Link>
-            <Link to="/cart" className={classes.link}>
-                <IconButton className={classes.btnHov} color="inherit">
-                    <span style={{fontSize: '0.6em'}}>{quantity ? quantity : null}</span>
-                    <ShoppingCart />
-                </IconButton>
-            </Link>
-        </>
+                <Link to="/products" className={classes.link}>
+                    <Button
+                        className={classes.btnHov}
+                        color="inherit">Shop/Products
+                    </Button>
+                </Link>
+                <Link to="/cart" className={classes.link}>
+                    <IconButton className={classes.btnHov} color="inherit">
+                        <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                        <ShoppingCart />
+                    </IconButton>
+                </Link>
+            </>
+        ) : (
+                <>
+                    <Link to="/products" className={classes.link}>
+                        <Button
+                            className={classes.btnHov}
+                            color="inherit">Shop/Products
+                        </Button>
+                    </Link>
+                    <Link to="/cart" className={classes.link}>
+                        <IconButton className={classes.btnHov} color="inherit">
+                            <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                            <ShoppingCart />
+                        </IconButton>
+                    </Link>
+                </>
+            )
     );
 
     if (isMobile) {
-        visibleButtons = <SideNav quantity={quantity}/>
+        visibleButtons = <SideNav quantity={quantity} />
     }
 
     return (
