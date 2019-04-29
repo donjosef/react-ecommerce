@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import Product from './Product';
 import { Grid } from '@material-ui/core';
 import { products } from '../../products';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    container: {
+        marginTop: '64px',
+        [theme.breakpoints.down('xs')]: {
+            marginTop: '56px'
+        }
+    }
+});
 
 class Products extends Component {
 
@@ -18,13 +28,14 @@ class Products extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
-            <Grid container style={{marginTop: '64px'}}>
-                {products.map(product => <Product key={product.id} product={product} /> )}
+            <Grid container className={classes.container}>
+                {products.map(product => <Product key={product.id} product={product} />)}
             </Grid>
         )
     }
 }
 
 
-export default Products;
+export default withStyles(styles)(Products);
