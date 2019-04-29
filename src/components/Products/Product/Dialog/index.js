@@ -12,7 +12,7 @@ import {
     Typography
 } from '@material-ui/core';
 import { Close, ShoppingCart } from '@material-ui/icons';
-import color from '@material-ui/core/colors/brown';
+import Context from '../../../../context';
 
 const styles = theme => ({
     appBar: {
@@ -60,6 +60,8 @@ class FullScreenDialog extends Component {
         isOpen: false
     }
 
+    static contextType = Context;
+
     handleClickOpen = () => {
         this.setState({ isOpen: true })
     }
@@ -70,7 +72,6 @@ class FullScreenDialog extends Component {
 
     render() {
         const { product, classes, bgColor } = this.props;
-
         return (
             <>
                 <Button
@@ -100,10 +101,10 @@ class FullScreenDialog extends Component {
                     </AppBar>
                     <Grid container>
                         <Grid item md={6} sm={6} xs={12}>
-                            <Paper 
-                                style={{background: bgColor}} 
-                                className={classes.paper} 
-                                square 
+                            <Paper
+                                style={{ background: bgColor }}
+                                className={classes.paper}
+                                square
                                 elevation={2}>
                                 <Typography
                                     color="inherit"
@@ -131,7 +132,8 @@ class FullScreenDialog extends Component {
                                     className={classes.button}
                                     size="medium"
                                     color="inherit"
-                                    variant="outlined">ADD TO CART</Button>
+                                    variant="outlined"
+                                    onClick={() => this.context.addProductToCart(product)}>ADD TO CART</Button>
                                 <Button
                                     className={classes.button}
                                     size="medium"
@@ -141,10 +143,10 @@ class FullScreenDialog extends Component {
                             </Paper>
                         </Grid>
                         <Grid item md={6} sm={6} xs={12}>
-                            <Paper 
-                                style={{background: bgColor}}
-                                className={classes.paper} 
-                                square 
+                            <Paper
+                                style={{ background: bgColor }}
+                                className={classes.paper}
+                                square
                                 elevation={2}>
                                 <img
                                     className={classes.img}
