@@ -15,6 +15,7 @@ class SideNav extends Component {
     }
 
     render() {
+        const { quantity } = this.props;
         const list = (
             <List>
                 <ListItem>
@@ -35,6 +36,7 @@ class SideNav extends Component {
                 </ListItem>
                 <ListItem>
                     <IconButton color="inherit">
+                        <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
                         <ShoppingCart />
                     </IconButton>
                 </ListItem>

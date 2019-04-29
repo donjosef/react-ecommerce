@@ -53,7 +53,7 @@ const Header = ({ classes, quantity }) => {
     );
 
     if (isMobile) {
-        visibleButtons = <SideNav />
+        visibleButtons = <SideNav quantity={quantity}/>
     }
 
     return (
