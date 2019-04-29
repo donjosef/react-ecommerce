@@ -23,8 +23,9 @@ class SideNav extends Component {
                     <Button
                         fullWidth
                         color="inherit"
-                        component="a">
-                        Contacts
+                        component="a"
+                        href="#newsletter">
+                        Newsletter
                     </Button>
                 </ListItem>
                 <ListItem>
