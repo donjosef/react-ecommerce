@@ -72,6 +72,7 @@ class FullScreenDialog extends Component {
 
     render() {
         const { product, classes, bgColor } = this.props;
+        const quantity = this.context.cart.reduce((acc, product) => acc + product.quantity, 0);
         return (
             <>
                 <Button
@@ -95,6 +96,7 @@ class FullScreenDialog extends Component {
                                 <Close />
                             </IconButton>
                             <IconButton className={classes.btnHov} color="inherit">
+                                <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
                                 <ShoppingCart />
                             </IconButton>
                         </Toolbar>
