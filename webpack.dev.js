@@ -6,11 +6,11 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
-        contentBase: './dist',
+        contentBase: './build',
         "historyApiFallback": true
     },
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'build'),
         filename: "bundle.js",
         publicPath: "/"
     }
