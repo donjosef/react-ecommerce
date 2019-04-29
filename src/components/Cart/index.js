@@ -42,6 +42,8 @@ const styles = theme => ({
 });
 
 const Cart = ({ cart, classes, onChangeQuantity }) => {
+    //total of ALL watches
+    const total = cart.reduce((acc, watch) => acc + (watch.quantity * watch.price), 0);
 
     return (
         <section className={classes.container}>
@@ -72,12 +74,14 @@ const Cart = ({ cart, classes, onChangeQuantity }) => {
                             </ListItem>
                         ))}
                     </List>
+                    <strong>Total: {total}</strong>
+                    <br />
                     <Button
                         className={classes.button}
                         size="medium"
                         variant="contained">
                         Order
-                </Button>
+                    </Button>
                 </>
             )}
         </section>
