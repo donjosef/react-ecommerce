@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Drawer, List, ListItem, ListItemText, Button, IconButton } from '@material-ui/core';
+import { Drawer, List, ListItem, Button, IconButton } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 import { ShoppingCart, Menu } from '@material-ui/icons';
 
@@ -35,10 +36,12 @@ class SideNav extends Component {
                     </Button>
                 </ListItem>
                 <ListItem>
-                    <IconButton color="inherit">
-                        <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                        <ShoppingCart />
-                    </IconButton>
+                    <Link to='/cart' style={{textDecoration: 'none', color: 'black'}}>
+                        <IconButton color="inherit">
+                            <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                            <ShoppingCart />
+                        </IconButton>
+                    </Link>
                 </ListItem>
             </List>
         );
