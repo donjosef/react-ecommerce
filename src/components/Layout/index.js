@@ -4,7 +4,7 @@ import Header from '../Header';
 const Layout = (props) => {
   return (
     <div>
-      <Header />
+      <Header quantity={props.quantity}/>
       {props.children}
     </div>
   )
