@@ -64,6 +64,7 @@ const Cart = ({ cart, classes, onChangeQuantity }) => {
                                         <input
                                             style={{ width: '50%' }}
                                             type="number"
+                                            min="0"
                                             value={product.quantity}
                                             onChange={(e) => onChangeQuantity(e, product)} />
                                     } />
