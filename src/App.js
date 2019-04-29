@@ -36,9 +36,11 @@ class App extends Component {
 
     render() {
         const { location: { pathname } } = this.props;
+        //quantity of products that will be in cart(the number next to the cart icon)
+        const quantity = this.state.cart.reduce((acc, product) => acc + product.quantity, 0); 
         return (
             <div className="App">
-                <Layout>
+                <Layout quantity={quantity}>
                     <Route exact path='/' component={Landing} />
                     <Context.Provider value={{ 
                         cart: this.state.cart,
