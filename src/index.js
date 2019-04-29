@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import './index.css';
 
 render(
-    <BrowserRouter>
+    <BrowserRouter basename='/react-ecommerce'>
         <Route component={App}/>
     </BrowserRouter>, document.getElementById('root')
 );
