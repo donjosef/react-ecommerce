@@ -52,7 +52,7 @@ const Cart = ({ cart, classes, onChangeQuantity }) => {
                 <>
                     <List className={classes.list}>
                         {cart.map(product => (
-                            <ListItem className={classes.listItem}>
+                            <ListItem key={product.id} className={classes.listItem}>
                                 <ListItemIcon>
                                     <Delete />
                                 </ListItemIcon>
@@ -65,7 +65,7 @@ const Cart = ({ cart, classes, onChangeQuantity }) => {
                                             style={{ width: '50%' }}
                                             type="number"
                                             value={product.quantity}
-                                            onChange={onChangeQuantity} />
+                                            onChange={(e) => onChangeQuantity(e, product)} />
                                     } />
                                 <ListItemText primary="Total" secondary={product.quantity * product.price} />
                             </ListItem>
