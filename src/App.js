@@ -62,7 +62,7 @@ class App extends Component {
         const quantity = this.state.cart.reduce((acc, product) => acc + product.quantity, 0); 
         return (
             <div className="App">
-                <Layout quantity={quantity}>
+                <Layout pathname={pathname} quantity={quantity}>
                     <Route exact path='/' component={Landing} />
                     <Context.Provider value={{ 
                         cart: this.state.cart,
