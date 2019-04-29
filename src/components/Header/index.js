@@ -25,7 +25,7 @@ const styles = theme => ({
     }
 });
 
-const Header = ({ classes }) => {
+const Header = ({ classes, quantity }) => {
     const isMobile = useMediaQuery('(max-width: 500px)');
 
     let visibleButtons = (
@@ -45,6 +45,7 @@ const Header = ({ classes }) => {
             </Link>
             <Link to="/cart" className={classes.link}>
                 <IconButton className={classes.btnHov} color="inherit">
+                    <span style={{fontSize: '0.6em'}}>{quantity ? quantity : null}</span>
                     <ShoppingCart />
                 </IconButton>
             </Link>
