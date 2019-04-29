@@ -11,12 +11,17 @@ import {
     Paper,
     Typography
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 import { Close, ShoppingCart } from '@material-ui/icons';
 import Context from '../../../../context';
 
 const styles = theme => ({
     appBar: {
         background: 'black'
+    },
+    link: {
+        textDecoration: 'none',
+        color: 'white'
     },
     btnHov: {
         '&:hover': {
@@ -95,10 +100,12 @@ class FullScreenDialog extends Component {
                                 onClick={this.handleClose}>
                                 <Close />
                             </IconButton>
-                            <IconButton className={classes.btnHov} color="inherit">
-                                <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                                <ShoppingCart />
-                            </IconButton>
+                            <Link className={classes.link} to='/cart'>
+                                <IconButton className={classes.btnHov} color="inherit">
+                                    <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                                    <ShoppingCart />
+                                </IconButton>
+                            </Link>
                         </Toolbar>
                     </AppBar>
                     <Grid container>
