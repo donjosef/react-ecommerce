@@ -28,12 +28,14 @@ class SideNav extends Component {
                     </Button>
                 </ListItem>
                 <ListItem>
-                    <Button
-                        fullWidth
-                        color="inherit"
-                        component="a">
-                        Shop/Products
-                    </Button>
+                    <Link to='/products' style={{textDecoration: 'none', color: 'black'}}>
+                        <Button
+                            fullWidth
+                            color="inherit"
+                            component="a">
+                            Shop/Products
+                        </Button>
+                    </Link>
                 </ListItem>
                 <ListItem>
                     <Link to='/cart' style={{textDecoration: 'none', color: 'black'}}>
