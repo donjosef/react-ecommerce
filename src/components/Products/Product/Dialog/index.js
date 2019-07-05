@@ -90,7 +90,6 @@ class FullScreenDialog extends Component {
                 <Dialog
                     fullScreen
                     open={this.state.isOpen}
-                    onClose={this.handleClose}
                     TransitionComponent={Slide}>
                     <AppBar className={classes.appBar} position="relative">
                         <Toolbar className={classes.toolBar}>
