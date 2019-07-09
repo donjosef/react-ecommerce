@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Form from './components/Form'
 import Layout from './components/Layout';
 import Landing from './components/Landing';
 import Products from './components/Products';
@@ -81,7 +80,6 @@ class App extends Component {
                         )}
                     />
                 </Layout>
-                {pathname !== '/cart' && <Form />}
             </div>
         )
     }
