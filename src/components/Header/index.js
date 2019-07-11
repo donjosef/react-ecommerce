@@ -1,8 +1,8 @@
 import React from 'react';
 import SideNav from '../SideNav';
+import NavigationItems from './NavigationItems';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, IconButton } from '@material-ui/core';
-import { ShoppingCart, Menu } from '@material-ui/icons';
+import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 
@@ -10,11 +10,6 @@ const styles = theme => ({
     root: {
         flexGrow: 1,
         background: 'black'
-    },
-    btnHov: {
-        '&:hover': {
-            background: 'rgba(255,255,255, 0.1)'
-        }
     },
     grow: {
         flexGrow: 1
@@ -29,48 +24,15 @@ const Header = ({ classes, quantity, pathname }) => {
     const isMobile = useMediaQuery('(max-width: 500px)');
 
     let visibleButtons = (
-        pathname == '/' ? (
-            <>
-                <Button
-                    className={classes.btnHov}
-                    color="inherit"
-                    component="a"
-                    href="#newsletter">
-                    Newsletter
-                </Button>
-                <Link to="/products" className={classes.link}>
-                    <Button
-                        className={classes.btnHov}
-                        color="inherit">Shop/Products
-                    </Button>
-                </Link>
-                <Link to="/cart" className={classes.link}>
-                    <IconButton className={classes.btnHov} color="inherit">
-                        <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                        <ShoppingCart />
-                    </IconButton>
-                </Link>
-            </>
-        ) : (
-                <>
-                    <Link to="/products" className={classes.link}>
-                        <Button
-                            className={classes.btnHov}
-                            color="inherit">Shop/Products
-                        </Button>
-                    </Link>
-                    <Link to="/cart" className={classes.link}>
-                        <IconButton className={classes.btnHov} color="inherit">
-                            <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                            <ShoppingCart />
-                        </IconButton>
-                    </Link>
-                </>
-            )
-    );
+        <NavigationItems 
+            isNewsletterVisible={pathname == '/'}
+            quantity={quantity}
+            forMobile={false}
+        />
+    )
 
     if (isMobile) {
-        visibleButtons = <SideNav quantity={quantity} />
+        visibleButtons = <SideNav pathname={pathname} quantity={quantity} />
     }
 
     return (
