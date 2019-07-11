@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Drawer, List, ListItem, Button, IconButton } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { Drawer, IconButton } from '@material-ui/core';
+import NavigationItems from '../Header/NavigationItems';
 
-import { ShoppingCart, Menu } from '@material-ui/icons';
+import { Menu } from '@material-ui/icons';
 
 class SideNav extends Component {
     state = {
@@ -16,37 +16,7 @@ class SideNav extends Component {
     }
 
     render() {
-        const { quantity } = this.props;
-        const list = (
-            <List>
-                <ListItem>
-                    <Button
-                        fullWidth
-                        color="inherit"
-                        component="a"
-                        href="#newsletter">
-                        Newsletter
-                    </Button>
-                </ListItem>
-                <ListItem>
-                    <Link to='/products' style={{textDecoration: 'none', color: 'black'}}>
-                        <Button
-                            fullWidth
-                            color="inherit">
-                            Shop/Products
-                        </Button>
-                    </Link>
-                </ListItem>
-                <ListItem>
-                    <Link to='/cart' style={{textDecoration: 'none', color: 'black'}}>
-                        <IconButton color="inherit">
-                            <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                            <ShoppingCart />
-                        </IconButton>
-                    </Link>
-                </ListItem>
-            </List>
-        );
+        const { quantity, pathname } = this.props;
 
         return (
             <div>
@@ -59,7 +29,10 @@ class SideNav extends Component {
                         role="button"
                         onClick={this.toggleDrawer}
                     >
-                        {list}
+                        <NavigationItems 
+                            isNewsletterVisible={pathname == '/'} 
+                            quantity={quantity} 
+                            forMobile={true}/>
                     </div>
                 </Drawer>
             </div>
