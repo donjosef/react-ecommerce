@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Landing from './components/Landing';
 import Products from './components/Products';
 import Cart from './components/Cart';
+import Login from './components/Login';
 import { Route } from 'react-router-dom';
 import Context from './context';
 
@@ -63,6 +64,7 @@ class App extends Component {
             <div className="App">
                 <Layout pathname={pathname} quantity={quantity}>
                     <Route exact path='/' component={Landing} />
+                    <Route path='/login' component={Login} />
                     <Context.Provider value={{ 
                         cart: this.state.cart,
                         addProductToCart: this.handleAddProduct 
