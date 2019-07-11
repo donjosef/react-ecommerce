@@ -29,7 +29,7 @@ const Header = ({ classes, quantity, pathname }) => {
     const isMobile = useMediaQuery('(max-width: 500px)');
 
     let visibleButtons = (
-        pathname !== '/cart' ? (
+        pathname == '/' ? (
             <>
                 <Button
                     className={classes.btnHov}
