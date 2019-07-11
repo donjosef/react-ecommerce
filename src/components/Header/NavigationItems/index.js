@@ -46,6 +46,9 @@ const NavigationItems = ({
             <Link to="/products" className={forMobile ? classes.linkForMobile : classes.link}>
                 <Button className={classes.btnHov} color="inherit">Shop/Products</Button>
             </Link>
+            <Link to="/login" className={forMobile ? classes.linkForMobile : classes.link}>
+                <Button className={classes.btnHov} color="inherit">Login</Button>
+            </Link>
             <Link to="/cart" className={forMobile ? classes.linkForMobile : classes.link}>
                 <IconButton className={classes.btnHov} color="inherit">
                     <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
