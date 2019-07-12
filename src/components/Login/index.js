@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withControlledForm from '../../hoc/withControlledForm';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -19,17 +20,19 @@ const styles = theme => ({
     focused: {
         color: ['black', '!important']
     },
-    button: {
+    submitBtn: {
         background: 'black',
         color: 'white',
-        marginTop: 15
+        marginTop: 15,
+        '&:hover': {
+            background: 'rgba(0,0,0,0.85)'
+        }
     }
 });
 
 class Login extends Component {
     render() {
-        const { classes } = this.props;
-
+        const { classes, email, password, onChange } = this.props;
         return (
             <div className="auth-form">
                 <form className={classes.form}>
@@ -44,6 +47,8 @@ class Login extends Component {
                                 focused: classes.focused
                             }
                         }}
+                        value={email}
+                        onChange={onChange('email')}
                         label="Email"
                         margin="normal"
                         fullWidth
@@ -60,6 +65,8 @@ class Login extends Component {
                                 focused: classes.focused
                             }
                         }}
+                        value={password}
+                        onChange={onChange('password')}
                         label="Password"
                         type="password"
                         margin="normal"
@@ -68,7 +75,7 @@ class Login extends Component {
                     <br />
                     <Button
                         classes={{
-                            root: classes.button
+                            root: classes.submitBtn
                         }} variant="contained">
                         Login
                     </Button>
@@ -77,7 +84,7 @@ class Login extends Component {
                     <small>Don't have an account?</small>
                     <Button
                         classes={{
-                            root: classes.button
+                            root: classes.submitBtn
                         }} variant="contained">
                         Click here to register
                     </Button>
@@ -87,4 +94,4 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(Login);
+export default withStyles(styles)(withControlledForm(Login));
