@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import withControlledForm from '../../hoc/withControlledForm';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import './Login.css';
 
@@ -27,6 +28,9 @@ const styles = theme => ({
         '&:hover': {
             background: 'rgba(0,0,0,0.85)'
         }
+    },
+    submitLink: {
+        textDecoration: 'none'
     }
 });
 
@@ -82,12 +86,14 @@ class Login extends Component {
                 </form>
                 <div className="auth-form__register-now">
                     <small>Don't have an account?</small>
-                    <Button
-                        classes={{
-                            root: classes.submitBtn
-                        }} variant="contained">
-                        Click here to register
-                    </Button>
+                    <Link to="/signup" className={classes.submitLink}>
+                        <Button
+                            classes={{
+                                root: classes.submitBtn
+                            }} variant="contained">
+                            Click here to register
+                        </Button>
+                    </Link>
                 </div>
             </div>
         )
