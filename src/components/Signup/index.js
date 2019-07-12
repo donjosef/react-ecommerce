@@ -28,9 +28,41 @@ const styles = theme => ({
 });
 
 class Signup extends Component {
+    state = {
+        emailError: "",
+        passwordError: ""
+    }
+
+    handleValidation = (e) => {
+        if(e.target.name === 'email') {
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+            if(!emailRegex.test(this.props.email)) {
+                this.setState({
+                    emailError: 'Enter a valid email format'
+                })
+            } else {
+                this.setState({
+                    emailError: ''
+                }) 
+            }
+        }
+
+        if(e.target.name === 'password') {
+            if(this.props.password.length < 6) {
+                this.setState({
+                    passwordError: 'Password must be at least 6 characters'
+                })
+            } else {
+                this.setState({
+                    passwordError: ''
+                })
+            }
+        }
+    }
+
     render() {
         const { classes, email, password, onChange } = this.props;
-        console.log('inside Signup', this.props);
         return (
             <div className="auth-form">
                 <form className={classes.form}>
@@ -45,9 +77,12 @@ class Signup extends Component {
                                 focused: classes.focused
                             }
                         }}
+                        error={this.state.emailError ? true : false}
                         value={email}
+                        name="email"
                         onChange={onChange('email')}
-                        label="Email"
+                        onBlur={this.handleValidation}
+                        label={this.state.emailError ? this.state.emailError : "Email"}
                         margin="normal"
                         fullWidth
                     />
@@ -63,9 +98,12 @@ class Signup extends Component {
                                 focused: classes.focused
                             }
                         }}
+                        error={this.state.passwordError ? true : false}
                         value={password}
+                        name="password"
                         onChange={onChange('password')}
-                        label="Password"
+                        onBlur={this.handleValidation}
+                        label={this.state.passwordError ? this.state.passwordError : "Password"}
                         type="password"
                         margin="normal"
                         fullWidth
@@ -74,7 +112,9 @@ class Signup extends Component {
                     <Button
                         classes={{
                             root: classes.button
-                        }} variant="contained">
+                        }} 
+                        variant="contained"
+                        disabled={this.state.emailError || this.state.passwordError ? true : false}>
                         Sign up
                     </Button>
                 </form>
