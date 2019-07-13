@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import Spinner from '../Spinner';
 import withControlledForm from '../../hoc/withControlledForm';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
+import { auth } from '../../store/actions/auth';
 
 import './Signup.css';
 
@@ -61,11 +64,17 @@ class Signup extends Component {
         }
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        const {email, password } = this.props;
+        this.props.onAuth(email, password)
+    }
+
     render() {
         const { classes, email, password, onChange } = this.props;
-        return (
-            <div className="auth-form">
-                <form className={classes.form}>
+
+        let form = (
+            <form className={classes.form} onSubmit={this.handleSubmit}>
                     <TextField
                         InputProps={{
                             classes: {
@@ -112,15 +121,29 @@ class Signup extends Component {
                     <Button
                         classes={{
                             root: classes.button
-                        }} 
+                        }}
+                        type='submit'
                         variant="contained"
                         disabled={this.state.emailError || this.state.passwordError ? true : false}>
                         Sign up
                     </Button>
                 </form>
+        );
+
+        return (
+            <div className="auth-form">
+                {form}
             </div>
         )
     }
 }
 
-export default withStyles(styles)(withControlledForm(Signup));
+const mapStateToProps = state => ({
+
+});
+
+const mapDispatchToProps = dispatch => ({
+    onAuth: (email, password) => dispatch(auth(email, password))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withControlledForm(Signup)))
