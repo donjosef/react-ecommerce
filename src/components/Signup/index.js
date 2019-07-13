@@ -71,7 +71,7 @@ class Signup extends Component {
     }
 
     render() {
-        const { classes, email, password, onChange } = this.props;
+        const { classes, email, password, onChange, authLoading } = this.props;
 
         let form = (
             <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -130,6 +130,10 @@ class Signup extends Component {
                 </form>
         );
 
+        if(authLoading) {
+            form = <Spinner />
+        }
+
         return (
             <div className="auth-form">
                 {form}
@@ -139,7 +143,7 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-
+    authLoading: state.loading
 });
 
 const mapDispatchToProps = dispatch => ({
