@@ -3,6 +3,7 @@ import { Button, IconButton } from '@material-ui/core';
 import { ShoppingCart } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux';
 
 const styles = theme => ({
     forMobile: {
@@ -30,7 +31,8 @@ const NavigationItems = ({
     isNewsletterVisible,
     quantity,
     classes,
-    forMobile
+    forMobile,
+    loggedIn
 }) => {
     return (
         <div className={forMobile ? classes.forMobile : null}>
@@ -46,17 +48,25 @@ const NavigationItems = ({
             <Link to="/products" className={forMobile ? classes.linkForMobile : classes.link}>
                 <Button className={classes.btnHov} color="inherit">Shop/Products</Button>
             </Link>
-            <Link to="/login" className={forMobile ? classes.linkForMobile : classes.link}>
-                <Button className={classes.btnHov} color="inherit">Login</Button>
-            </Link>
-            <Link to="/cart" className={forMobile ? classes.linkForMobile : classes.link}>
-                <IconButton className={classes.btnHov} color="inherit">
-                    <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                    <ShoppingCart />
-                </IconButton>
-            </Link>
+            {!loggedIn && (
+                <Link to="/login" className={forMobile ? classes.linkForMobile : classes.link}>
+                    <Button className={classes.btnHov} color="inherit">Login</Button>
+                </Link>
+            )}
+            {loggedIn && (
+                <Link to="/cart" className={forMobile ? classes.linkForMobile : classes.link}>
+                    <IconButton className={classes.btnHov} color="inherit">
+                        <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                        <ShoppingCart />
+                    </IconButton>
+                </Link>
+            )}
         </div>
     )
 }
 
-export default withStyles(styles)(NavigationItems);
+const mapStateToProps = state => ({
+    loggedIn: state.token !== null
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(NavigationItems));
