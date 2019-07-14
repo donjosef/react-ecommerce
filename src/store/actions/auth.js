@@ -1,13 +1,13 @@
 import * as actionTypes from './actionTypes';
 import axios from 'axios';
 
-const authInit = () => {
+export const authInit = () => {
     return {
         type: actionTypes.AUTH_INIT
     }
 }
 
-const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         token, 
@@ -15,7 +15,7 @@ const authSuccess = (token, userId) => {
     }
 }
 
-const authFail = (error) => {
+export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
         error
