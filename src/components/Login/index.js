@@ -3,6 +3,8 @@ import withControlledForm from '../../hoc/withControlledForm';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { login } from '../../store/actions/login';
+import { connect } from 'react-redux';
 
 import './Login.css';
 
@@ -34,12 +36,20 @@ const styles = theme => ({
     }
 });
 
+
 class Login extends Component {
+
+    handleLogin = (e) => {
+        e.preventDefault();
+        const {email, password} = this.props;
+        this.props.onLogin(email, password);
+    }
+    
     render() {
         const { classes, email, password, onChange } = this.props;
         return (
             <div className="auth-form">
-                <form className={classes.form}>
+                <form className={classes.form} onSubmit={this.handleLogin}>
                     <TextField
                         InputProps={{
                             classes: {
@@ -80,7 +90,8 @@ class Login extends Component {
                     <Button
                         classes={{
                             root: classes.submitBtn
-                        }} variant="contained">
+                        }} variant="contained"
+                        type='submit'>
                         Login
                     </Button>
                 </form>
@@ -100,4 +111,12 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(withControlledForm(Login));
+const mapStateToProps = props => ({
+
+})
+
+const mapDispatchToProps = dispatch => ({
+    onLogin: (email, password) => dispatch(login(email, password))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withControlledForm(Login)));
