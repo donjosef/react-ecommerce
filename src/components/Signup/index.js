@@ -26,7 +26,10 @@ const styles = theme => ({
     button: {
         background: 'black',
         color: 'white',
-        marginTop: 15
+        marginTop: 15,
+        '&:hover': {
+            background: 'rgba(0,0,0,0.85)'
+        }
     }
 });
 
