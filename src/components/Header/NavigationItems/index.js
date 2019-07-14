@@ -48,10 +48,14 @@ const NavigationItems = ({
             <Link to="/products" className={forMobile ? classes.linkForMobile : classes.link}>
                 <Button className={classes.btnHov} color="inherit">Shop/Products</Button>
             </Link>
-            {!loggedIn && (
+            {!loggedIn ? (
                 <Link to="/login" className={forMobile ? classes.linkForMobile : classes.link}>
                     <Button className={classes.btnHov} color="inherit">Login</Button>
                 </Link>
+            ) : (
+                <Link to="/logout" className={forMobile ? classes.linkForMobile : classes.link}>
+                    <Button className={classes.btnHov} color="inherit">Logout</Button>
+                </Link> 
             )}
             {loggedIn && (
                 <Link to="/cart" className={forMobile ? classes.linkForMobile : classes.link}>
