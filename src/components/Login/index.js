@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { login } from '../../store/actions/login';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import './Login.css';
 
@@ -47,7 +48,7 @@ class Login extends Component {
     }
 
     render() {
-        const { classes, email, password, onChange, loginLoading, loginError } = this.props;
+        const { classes, email, password, onChange, loginLoading, loginError, loggedIn } = this.props;
         let form = (
             <form className={classes.form} onSubmit={this.handleLogin}>
                 <TextField
@@ -103,6 +104,7 @@ class Login extends Component {
         }
         return (
             <div className="auth-form">
+                {loggedIn && <Redirect to='/' />}
                 {form}
                 {!loginLoading && (
                     <div className="auth-form__register-now">
@@ -124,7 +126,8 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
     loginLoading: state.loading,
-    loginError: state.error
+    loginError: state.error,
+    loggedIn: state.token !== null
 })
 
 const mapDispatchToProps = dispatch => ({
