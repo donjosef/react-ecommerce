@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import withControlledForm from '../../hoc/withControlledForm';
+import Spinner from '../Spinner';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
@@ -41,78 +42,87 @@ class Login extends Component {
 
     handleLogin = (e) => {
         e.preventDefault();
-        const {email, password} = this.props;
+        const { email, password } = this.props;
         this.props.onLogin(email, password);
     }
-    
+
     render() {
-        const { classes, email, password, onChange } = this.props;
+        const { classes, email, password, onChange, loginLoading } = this.props;
+        let form = (
+            <form className={classes.form} onSubmit={this.handleLogin}>
+                <TextField
+                    InputProps={{
+                        classes: {
+                            underline: classes.underline
+                        }
+                    }}
+                    InputLabelProps={{
+                        classes: {
+                            focused: classes.focused
+                        }
+                    }}
+                    value={email}
+                    onChange={onChange('email')}
+                    label="Email"
+                    margin="normal"
+                    fullWidth
+                />
+                <br />
+                <TextField
+                    InputProps={{
+                        classes: {
+                            underline: classes.underline
+                        }
+                    }}
+                    InputLabelProps={{
+                        classes: {
+                            focused: classes.focused
+                        }
+                    }}
+                    value={password}
+                    onChange={onChange('password')}
+                    label="Password"
+                    type="password"
+                    margin="normal"
+                    fullWidth
+                />
+                <br />
+                <Button
+                    classes={{
+                        root: classes.submitBtn
+                    }} variant="contained"
+                    type='submit'>
+                    Login
+                    </Button>
+            </form>
+        )
+
+        if (loginLoading) {
+            form = <Spinner />
+        }
         return (
             <div className="auth-form">
-                <form className={classes.form} onSubmit={this.handleLogin}>
-                    <TextField
-                        InputProps={{
-                            classes: {
-                                underline: classes.underline
-                            }
-                        }}
-                        InputLabelProps={{
-                            classes: {
-                                focused: classes.focused
-                            }
-                        }}
-                        value={email}
-                        onChange={onChange('email')}
-                        label="Email"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <br />
-                    <TextField
-                        InputProps={{
-                            classes: {
-                                underline: classes.underline
-                            }
-                        }}
-                        InputLabelProps={{
-                            classes: {
-                                focused: classes.focused
-                            }
-                        }}
-                        value={password}
-                        onChange={onChange('password')}
-                        label="Password"
-                        type="password"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <br />
-                    <Button
-                        classes={{
-                            root: classes.submitBtn
-                        }} variant="contained"
-                        type='submit'>
-                        Login
-                    </Button>
-                </form>
-                <div className="auth-form__register-now">
-                    <small>Don't have an account?</small>
-                    <Link to="/signup" className={classes.submitLink}>
-                        <Button
-                            classes={{
-                                root: classes.submitBtn
-                            }} variant="contained">
-                            Click here to register
-                        </Button>
-                    </Link>
-                </div>
+                {form}
+                {!loginLoading && (
+                    <div className="auth-form__register-now">
+                        <small>Don't have an account?</small>
+                        <Link to="/signup" className={classes.submitLink}>
+                            <Button
+                                classes={{
+                                    root: classes.submitBtn
+                                }} variant="contained">
+                                Click here to register
+                            </Button>
+                        </Link>
+                    </div>
+                )}
             </div>
         )
     }
 }
 
-const mapStateToProps = props => ({
-
+const mapStateToProps = state => ({
+    loginLoading: state.loading
 })
 
 const mapDispatchToProps = dispatch => ({
