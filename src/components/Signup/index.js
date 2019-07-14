@@ -71,7 +71,7 @@ class Signup extends Component {
     }
 
     render() {
-        const { classes, email, password, onChange, authLoading } = this.props;
+        const { classes, email, password, onChange, authLoading, authError } = this.props;
 
         let form = (
             <form className={classes.form} onSubmit={this.handleSubmit}>
@@ -127,6 +127,7 @@ class Signup extends Component {
                         disabled={this.state.emailError || this.state.passwordError ? true : false}>
                         Sign up
                     </Button>
+                    {authError ? <p>{authError.response.data.error.message}</p> : null}
                 </form>
         );
 
@@ -143,7 +144,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = state => ({
-    authLoading: state.loading
+    authLoading: state.loading,
+    authError: state.error
 });
 
 const mapDispatchToProps = dispatch => ({
