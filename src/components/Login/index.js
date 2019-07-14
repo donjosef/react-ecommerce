@@ -47,7 +47,7 @@ class Login extends Component {
     }
 
     render() {
-        const { classes, email, password, onChange, loginLoading } = this.props;
+        const { classes, email, password, onChange, loginLoading, loginError } = this.props;
         let form = (
             <form className={classes.form} onSubmit={this.handleLogin}>
                 <TextField
@@ -93,7 +93,8 @@ class Login extends Component {
                     }} variant="contained"
                     type='submit'>
                     Login
-                    </Button>
+                </Button>
+                {loginError && <p style={{color: 'red'}}>{loginError.response.data.error.message}</p>}
             </form>
         )
 
@@ -122,7 +123,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    loginLoading: state.loading
+    loginLoading: state.loading,
+    loginError: state.error
 })
 
 const mapDispatchToProps = dispatch => ({
