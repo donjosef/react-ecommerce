@@ -141,6 +141,58 @@
     }
 }
 
+.lds-dual-ring {
+    display: block;
+    margin: auto;
+    width: 64px;
+    height: 64px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 46px;
+    height: 46px;
+    margin: 1px;
+    border-radius: 50%;
+    border: 5px solid #000;
+    border-color: #000 transparent #000 transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+.auth-form {
+    padding: 20px;
+    width: 400px;
+    margin: 100px auto;
+    max-width: 90%;
+    border: 1px solid #999;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+}
+
+.auth-form__register-now {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.auth-form {
+    padding: 20px;
+    width: 400px;
+    margin: 100px auto;
+    max-width: 90%;
+    border: 1px solid #999;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 1px rgba(0,0,0,0.2);
+}
+
 
 * {
     box-sizing: border-box;
