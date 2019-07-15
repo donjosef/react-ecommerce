@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SideNav from '../SideNav';
 import NavigationItems from './NavigationItems';
 import { Link } from 'react-router-dom';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
+import { connect } from 'react-redux';
+import { authSuccess } from '../../store/actions/auth';
+
+
 
 const styles = theme => ({
     root: {
@@ -20,8 +24,16 @@ const styles = theme => ({
     }
 });
 
-const Header = ({ classes, quantity, pathname }) => {
+const Header = ({ classes, quantity, pathname, onLogin }) => {
     const isMobile = useMediaQuery('(max-width: 500px)');
+
+    useEffect(() => { 
+        if(localStorage.getItem('token')) {
+            const token = localStorage.getItem('token');
+            const userId = localStorage.getItem('userId');
+            onLogin(token, userId);
+        }
+    }, [])
 
     let visibleButtons = (
         <NavigationItems 
@@ -49,4 +61,8 @@ const Header = ({ classes, quantity, pathname }) => {
     )
 }
 
-export default withStyles(styles)(Header)
+const mapDispatchToProps = dispatch => ({
+    onLogin: (token, userId) => dispatch(authSuccess(token, userId))
+});
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Header))
