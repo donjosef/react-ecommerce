@@ -25,7 +25,7 @@ const styles = theme => ({
 });
 
 const Header = ({ classes, quantity, pathname, onLogin }) => {
-    const isMobile = useMediaQuery('(max-width: 500px)');
+    const isMobile = useMediaQuery('(max-width: 630px)');
 
     useEffect(() => { 
         if(localStorage.getItem('token')) {
