@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
 import { Route } from 'react-router-dom';
-import {useCart} from './context';
+import {CartProvider, useCart} from './context';
 
 import './App.css';
 
@@ -26,22 +26,12 @@ class App extends Component {
                     <Route path='/login' component={Login} />
                     <Route path='/signup' component={Signup} />
                     <Route path='/logout' component={Logout} />
-                    <Context.Provider value={{ 
-                        cart: this.state.cart,
-                        addProductToCart: this.handleAddProduct 
-                        }}>
+                    <CartProvider>
                         <Route path='/products' component={Products} />
-                    </Context.Provider>
-                    <Route
-                        path='/cart'
-                        render={() => (
-                            <Cart 
-                                cart={this.state.cart} 
-                                onChangeQuantity={this.handleChangeQuantity}
-                                onDeleteProduct={this.handleDeleteProduct}
-                                onOrderProduct={this.handleOrderProduct}/>
-                        )}
-                    />
+                    </CartProvider>
+                    <CartProvider>
+                        <Route path='/cart' component={Cart} />
+                    </CartProvider>
                 </Layout>
             </div>
         )
