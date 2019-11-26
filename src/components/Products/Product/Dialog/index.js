@@ -61,7 +61,7 @@ const styles = theme => ({
 })
 
 function FullScreenDialog(props) {
-    const [isOpen, setisOpen] = React.useState(false);
+    const [isOpen, setIsOpen] = React.useState(false);
 
 
     const handleClickOpen = () => {
