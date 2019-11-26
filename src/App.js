@@ -12,56 +12,13 @@ import Context from './context';
 import './App.css';
 
 class App extends Component {
-    state = {
-        cart: []
-    }
-
-    handleAddProduct = (watch) => {
-        const product = this.state.cart.find(product => product.name === watch.name);
-        if(!product) {
-            this.setState(prevState => ({
-                cart: prevState.cart.concat({...watch, quantity: 1})
-            }))
-        } else {
-            this.setState(prevState => ({
-                cart: prevState.cart.map(product => {
-                    return product.name === watch.name 
-                    ? {
-                    ...product, 
-                    quantity: product.quantity + 1 
-                    } 
-                    : product
-                })
-            }))
-        }
-    }
-
-    handleChangeQuantity = (e, watch) => {
-        const target = e.target; //prevent nullifying of e object. The alternative will be to use e.persist()
-        this.setState(prevState => ({
-            cart: prevState.cart.map(prod => (
-                prod.name === watch.name ? {...prod, quantity: parseInt(target.value, 10)} : prod
-            ))
-        }))
-    }
-
-    handleDeleteProduct = (name) => {
-        this.setState(prevState => ({
-            cart: prevState.cart.filter(prod => prod.name !== name )
-        }))
-    }
-
-    handleOrderProduct = () => {
-        alert('Congratulations! Your order has been placed!');
-        this.setState({
-            cart: []
-        })
-    } 
-
+    
     render() {
         const { location: { pathname } } = this.props;
+        const {cart} = useCart(); //custom hook that abstract useContext
+        
         //quantity of products that will be in cart(the number next to the cart icon)
-        const quantity = this.state.cart.reduce((acc, product) => acc + product.quantity, 0); 
+        const quantity = cart.reduce((acc, product) => acc + product.quantity, 0); 
         return (
             <div className="App">
                 <Layout pathname={pathname} quantity={quantity}>
