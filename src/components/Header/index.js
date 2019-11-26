@@ -7,8 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { unstable_useMediaQuery as useMediaQuery } from '@material-ui/core/useMediaQuery';
 import { connect } from 'react-redux';
 import { authSuccess } from '../../store/actions/auth';
-
-
+import {useCart} from '../../context';
 
 const styles = theme => ({
     root: {
@@ -24,11 +23,15 @@ const styles = theme => ({
     }
 });
 
-const Header = ({ classes, quantity, pathname, onLogin }) => {
+const Header = ({ classes, pathname, onLogin }) => {
     const isMobile = useMediaQuery('(max-width: 630px)');
+    const { cart } = useCart();
+    
+    //quantity of products that will be in cart(the number next to the cart icon)
+    const quantity = cart.reduce((acc, product) => acc + product.quantity, 0);
 
-    useEffect(() => { 
-        if(localStorage.getItem('token')) {
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
             const token = localStorage.getItem('token');
             const userId = localStorage.getItem('userId');
             onLogin(token, userId);
@@ -36,7 +39,7 @@ const Header = ({ classes, quantity, pathname, onLogin }) => {
     }, [])
 
     let visibleButtons = (
-        <NavigationItems 
+        <NavigationItems
             isNewsletterVisible={pathname == '/'}
             quantity={quantity}
             forMobile={false}
