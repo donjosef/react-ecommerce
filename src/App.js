@@ -7,7 +7,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
 import { Route } from 'react-router-dom';
-import Context from './context';
+import {useCart} from './context';
 
 import './App.css';
 
@@ -16,7 +16,7 @@ class App extends Component {
     render() {
         const { location: { pathname } } = this.props;
         const {cart} = useCart(); //custom hook that abstract useContext
-        
+
         //quantity of products that will be in cart(the number next to the cart icon)
         const quantity = cart.reduce((acc, product) => acc + product.quantity, 0); 
         return (
