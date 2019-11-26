@@ -60,112 +60,109 @@ const styles = theme => ({
 
 })
 
-class FullScreenDialog extends Component {
-    state = {
-        isOpen: false
+function FullScreenDialog() {
+    const [isOpen, setisOpen] = React.useState(false);
+
+
+    const handleClickOpen = () => {
+        setIsOpen(true)
     }
 
-    static contextType = Context;
-
-    handleClickOpen = () => {
-        this.setState({ isOpen: true })
+    const handleClose = () => {
+        setIsOpen(false)
     }
 
-    handleClose = () => {
-        this.setState({ isOpen: false })
-    }
 
-    render() {
-        const { product, classes, bgColor } = this.props;
-        const quantity = this.context.cart.reduce((acc, product) => acc + product.quantity, 0);
-        return (
-            <>
-                <Button
-                    size="medium"
-                    color="inherit"
-                    variant="outlined"
-                    onClick={this.handleClickOpen}>
-                    Select
+    const { product, classes, bgColor } = props;
+    const quantity = context.cart.reduce((acc, product) => acc + product.quantity, 0);
+    return (
+        <>
+            <Button
+                size="medium"
+                color="inherit"
+                variant="outlined"
+                onClick={handleClickOpen}>
+                Select
                 </Button>
-                <Dialog
-                    fullScreen
-                    open={this.state.isOpen}
-                    TransitionComponent={Slide}>
-                    <AppBar className={classes.appBar} position="relative">
-                        <Toolbar className={classes.toolBar}>
-                            <IconButton
-                                className={classes.btnHov}
-                                color="inherit"
-                                onClick={this.handleClose}>
-                                <Close />
+            <Dialog
+                fullScreen
+                open={isOpen}
+                TransitionComponent={Slide}>
+                <AppBar className={classes.appBar} position="relative">
+                    <Toolbar className={classes.toolBar}>
+                        <IconButton
+                            className={classes.btnHov}
+                            color="inherit"
+                            onClick={handleClose}>
+                            <Close />
+                        </IconButton>
+                        <Link className={classes.link} to='/cart'>
+                            <IconButton className={classes.btnHov} color="inherit">
+                                <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                                <ShoppingCart />
                             </IconButton>
-                            <Link className={classes.link} to='/cart'>
-                                <IconButton className={classes.btnHov} color="inherit">
-                                    <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                                    <ShoppingCart />
-                                </IconButton>
-                            </Link>
-                        </Toolbar>
-                    </AppBar>
-                    <Grid container>
-                        <Grid item md={6} sm={6} xs={12}>
-                            <Paper
-                                style={{ background: bgColor }}
-                                className={classes.paper}
-                                square
-                                elevation={2}>
-                                <Typography
-                                    color="inherit"
-                                    gutterBottom
-                                    variant="h4">{product.name}
-                                </Typography>
-                                <Typography
-                                    color="inherit"
-                                    gutterBottom
-                                    variant="h4">
-                                    Product id: {product.id}
-                                </Typography>
-                                <Typography
-                                    color="inherit"
-                                    gutterBottom
-                                    variant="body1">{product.description}
-                                </Typography>
-                                <Typography
-                                    color="inherit"
-                                    gutterBottom
-                                    variant="body1">
-                                    Price: <strong>{product.price}</strong>
-                                </Typography>
-                                <Button
-                                    className={classes.button}
-                                    size="medium"
-                                    color="inherit"
-                                    variant="outlined"
-                                    onClick={() => this.context.addProductToCart(product)}>ADD TO CART</Button>
-                                <Button
-                                    className={classes.button}
-                                    size="medium"
-                                    color="inherit"
-                                    variant="outlined"
-                                    onClick={this.handleClose}>SEE MORE PRODUCTS</Button>
-                            </Paper>
-                        </Grid>
-                        <Grid item md={6} sm={6} xs={12}>
-                            <Paper
-                                style={{ background: bgColor }}
-                                className={classes.paper}
-                                square
-                                elevation={2}>
-                                <img
-                                    className={classes.img}
-                                    src={product.thumbnail} />
-                            </Paper>
-                        </Grid>
+                        </Link>
+                    </Toolbar>
+                </AppBar>
+                <Grid container>
+                    <Grid item md={6} sm={6} xs={12}>
+                        <Paper
+                            style={{ background: bgColor }}
+                            className={classes.paper}
+                            square
+                            elevation={2}>
+                            <Typography
+                                color="inherit"
+                                gutterBottom
+                                variant="h4">{product.name}
+                            </Typography>
+                            <Typography
+                                color="inherit"
+                                gutterBottom
+                                variant="h4">
+                                Product id: {product.id}
+                            </Typography>
+                            <Typography
+                                color="inherit"
+                                gutterBottom
+                                variant="body1">{product.description}
+                            </Typography>
+                            <Typography
+                                color="inherit"
+                                gutterBottom
+                                variant="body1">
+                                Price: <strong>{product.price}</strong>
+                            </Typography>
+                            <Button
+                                className={classes.button}
+                                size="medium"
+                                color="inherit"
+                                variant="outlined"
+                                onClick={() => context.addProductToCart(product)}>ADD TO CART</Button>
+                            <Button
+                                className={classes.button}
+                                size="medium"
+                                color="inherit"
+                                variant="outlined"
+                                onClick={handleClose}>SEE MORE PRODUCTS</Button>
+                        </Paper>
                     </Grid>
-                </Dialog>
-            </>
-        )
-    }
+                    <Grid item md={6} sm={6} xs={12}>
+                        <Paper
+                            style={{ background: bgColor }}
+                            className={classes.paper}
+                            square
+                            elevation={2}>
+                            <img
+                                className={classes.img}
+                                src={product.thumbnail} />
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </Dialog>
+        </>
+    )
+
 }
 
 export default withStyles(styles)(FullScreenDialog);
