@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { Close, ShoppingCart } from '@material-ui/icons';
-import Context from '../../../../context';
+import {useCart} from '../../../../context';
 
 const styles = theme => ({
     appBar: {
@@ -74,7 +74,9 @@ function FullScreenDialog() {
 
 
     const { product, classes, bgColor } = props;
-    const quantity = context.cart.reduce((acc, product) => acc + product.quantity, 0);
+    const {cart, addProductToCart} = useCart();
+    const quantity = cart.reduce((acc, product) => acc + product.quantity, 0);
+
     return (
         <>
             <Button
@@ -138,7 +140,7 @@ function FullScreenDialog() {
                                 size="medium"
                                 color="inherit"
                                 variant="outlined"
-                                onClick={() => context.addProductToCart(product)}>ADD TO CART</Button>
+                                onClick={() => addProductToCart(product)}>ADD TO CART</Button>
                             <Button
                                 className={classes.button}
                                 size="medium"
