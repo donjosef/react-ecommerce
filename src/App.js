@@ -11,9 +11,9 @@ import { CartProvider, useCart } from './context';
 
 import './App.css';
 
-function App() {
+function App(props) {
 
-    const { location: { pathname } } = this.props;
+    const { location: { pathname } } = props;
     const { cart } = useCart(); //custom hook that abstract useContext
 
     //quantity of products that will be in cart(the number next to the cart icon)
