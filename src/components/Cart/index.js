@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
+import {useCart} from '../../context';
 
 const styles = theme => ({
     container: {
@@ -41,8 +42,9 @@ const styles = theme => ({
     }
 });
 
-const Cart = ({ cart, classes, onChangeQuantity, onDeleteProduct, onOrderProduct }) => {
+const Cart = ({  classes }) => {
     //total of ALL watches
+    const {cart, onDeleteProduct, onChangeQuantity, onOrderProduct} = useCart();
     const total = cart.reduce((acc, watch) => acc + (watch.quantity * watch.price), 0);
 
     return (
