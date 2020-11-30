@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import Spinner from '../Spinner';
-import withControlledForm from '../../hoc/withControlledForm';
+import { useControlledForm } from '../../hooks/useControlledForm';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -33,117 +33,106 @@ const styles = theme => ({
     }
 });
 
-class Signup extends Component {
-    state = {
-        emailError: "",
-        passwordError: ""
-    }
+function Signup(props) {
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
+    const {email, password, onChangeEmail, onChangePassword} = useControlledForm()
 
-    handleValidation = (e) => {
-        if(e.target.name === 'email') {
+    const handleValidation = (e) => {
+        if (e.target.name === 'email') {
             const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    
-            if(!emailRegex.test(this.props.email)) {
-                this.setState({
-                    emailError: 'Enter a valid email format'
-                })
+
+            if (!emailRegex.test(email)) {
+                setEmailError('Enter a valid email format')
             } else {
-                this.setState({
-                    emailError: ''
-                }) 
+                setEmailError('')
             }
         }
 
-        if(e.target.name === 'password') {
-            if(this.props.password.length < 6) {
-                this.setState({
-                    passwordError: 'Password must be at least 6 characters'
-                })
+        if (e.target.name === 'password') {
+            if (password.length < 6) {
+                setPasswordError('Password must be at least 6 characters')
             } else {
-                this.setState({
-                    passwordError: ''
-                })
+                setPasswordError('')
             }
         }
     }
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const {email, password } = this.props;
-        this.props.onAuth(email, password)
+        props.onAuth(email, password)
     }
 
-    render() {
-        const { classes, email, password, onChange, authLoading, authError } = this.props;
+    const { classes, authLoading, authError } = props;
 
-        let form = (
-            <form className={classes.form} onSubmit={this.handleSubmit}>
-                    <TextField
-                        InputProps={{
-                            classes: {
-                                underline: classes.underline
-                            }
-                        }}
-                        InputLabelProps={{
-                            classes: {
-                                focused: classes.focused
-                            }
-                        }}
-                        error={this.state.emailError ? true : false}
-                        value={email}
-                        name="email"
-                        onChange={onChange('email')}
-                        onBlur={this.handleValidation}
-                        label={this.state.emailError ? this.state.emailError : "Email"}
-                        margin="normal"
-                        fullWidth
-                    />
-                    <br />
-                    <TextField
-                        InputProps={{
-                            classes: {
-                                underline: classes.underline
-                            }
-                        }}
-                        InputLabelProps={{
-                            classes: {
-                                focused: classes.focused
-                            }
-                        }}
-                        error={this.state.passwordError ? true : false}
-                        value={password}
-                        name="password"
-                        onChange={onChange('password')}
-                        onBlur={this.handleValidation}
-                        label={this.state.passwordError ? this.state.passwordError : "Password"}
-                        type="password"
-                        margin="normal"
-                        fullWidth
-                    />
-                    <br />
-                    <Button
-                        classes={{
-                            root: classes.button
-                        }}
-                        type='submit'
-                        variant="contained"
-                        disabled={this.state.emailError || this.state.passwordError ? true : false}>
-                        Sign up
-                    </Button>
-                    {authError ? <p>{authError.response.data.error.message}</p> : null}
-                </form>
-        );
+    let form = (
+        <form className={classes.form} onSubmit={handleSubmit}>
+            <TextField
+                InputProps={{
+                    classes: {
+                        underline: classes.underline
+                    }
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.focused
+                    }
+                }}
+                error={emailError ? true : false}
+                value={email}
+                name="email"
+                onChange={(e) => onChangeEmail(e.target.value)}
+                onBlur={handleValidation}
+                label={emailError ? emailError : "Email"}
+                margin="normal"
+                fullWidth
+            />
+            <br />
+            <TextField
+                InputProps={{
+                    classes: {
+                        underline: classes.underline
+                    }
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.focused
+                    }
+                }}
+                error={passwordError ? true : false}
+                value={password}
+                name="password"
+                onChange={(e) => onChangePassword(e.target.value)}
+                onBlur={handleValidation}
+                label={passwordError ? passwordError : "Password"}
+                type="password"
+                margin="normal"
+                fullWidth
+            />
+            <br />
+            <Button
+                classes={{
+                    root: classes.button
+                }}
+                type='submit'
+                variant="contained"
+                disabled={emailError || passwordError ? true : false}>
+                Sign up
+            </Button>
+            {authError ? <p>{authError.response.data.error.message}</p> : null}
+        </form>
+    );
 
-        if(authLoading) {
-            form = <Spinner />
-        }
-
-        return (
-            <div className="auth-form">
-                {form}
-            </div>
-        )
+    if (authLoading) {
+        form = <Spinner />
     }
+
+    return (
+        <div className="auth-form">
+            {form}
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => ({
@@ -155,4 +144,4 @@ const mapDispatchToProps = dispatch => ({
     onAuth: (email, password) => dispatch(auth(email, password))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withControlledForm(Signup)))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Signup))

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import withControlledForm from '../../hoc/withControlledForm';
+import React from 'react';
+import { useControlledForm } from '../../hooks/useControlledForm';
 import Spinner from '../Spinner';
 import { TextField, Button } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -39,89 +39,89 @@ const styles = theme => ({
 });
 
 
-class Login extends Component {
+function Login(props) {
+    const { email, password, onChangeEmail, onChangePassword } = useControlledForm()
 
-    handleLogin = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        const { email, password } = this.props;
-        this.props.onLogin(email, password);
+        props.onLogin(email, password);
     }
 
-    render() {
-        const { classes, email, password, onChange, loginLoading, loginError, loggedIn } = this.props;
-        let form = (
-            <form className={classes.form} onSubmit={this.handleLogin}>
-                <TextField
-                    InputProps={{
-                        classes: {
-                            underline: classes.underline
-                        }
-                    }}
-                    InputLabelProps={{
-                        classes: {
-                            focused: classes.focused
-                        }
-                    }}
-                    value={email}
-                    onChange={onChange('email')}
-                    label="Email"
-                    margin="normal"
-                    fullWidth
-                />
-                <br />
-                <TextField
-                    InputProps={{
-                        classes: {
-                            underline: classes.underline
-                        }
-                    }}
-                    InputLabelProps={{
-                        classes: {
-                            focused: classes.focused
-                        }
-                    }}
-                    value={password}
-                    onChange={onChange('password')}
-                    label="Password"
-                    type="password"
-                    margin="normal"
-                    fullWidth
-                />
-                <br />
-                <Button
-                    classes={{
-                        root: classes.submitBtn
-                    }} variant="contained"
-                    type='submit'>
-                    Login
-                </Button>
-                {loginError && <p style={{color: 'red'}}>{loginError.response.data.error.message}</p>}
-            </form>
-        )
+    const { classes, loginLoading, loginError, loggedIn } = props;
+    let form = (
+        <form className={classes.form} onSubmit={handleLogin}>
+            <TextField
+                InputProps={{
+                    classes: {
+                        underline: classes.underline
+                    }
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.focused
+                    }
+                }}
+                value={email}
+                onChange={(e) => onChangeEmail(e.target.value)}
+                label="Email"
+                margin="normal"
+                fullWidth
+            />
+            <br />
+            <TextField
+                InputProps={{
+                    classes: {
+                        underline: classes.underline
+                    }
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.focused
+                    }
+                }}
+                value={password}
+                onChange={(e) => onChangePassword(e.target.password)}
+                label="Password"
+                type="password"
+                margin="normal"
+                fullWidth
+            />
+            <br />
+            <Button
+                classes={{
+                    root: classes.submitBtn
+                }} variant="contained"
+                type='submit'>
+                Login
+            </Button>
+            {loginError && <p style={{ color: 'red' }}>{loginError.response.data.error.message}</p>}
+        </form>
+    )
 
-        if (loginLoading) {
-            form = <Spinner />
-        }
-        return (
-            <div className="auth-form">
-                {loggedIn && <Redirect to='/' />}
-                {form}
-                {!loginLoading && (
-                    <div className="auth-form__register-now">
-                        <small>Don't have an account?</small>
-                        <Link to="/signup" className={classes.submitLink}>
-                            <Button
-                                classes={{
-                                    root: classes.submitBtn
-                                }} variant="contained">
-                                Click here to register
-                            </Button>
-                        </Link>
-                    </div>
-                )}
-            </div>
-        )
+    if (loginLoading) {
+        form = <Spinner />
     }
+
+    return (
+        <div className="auth-form">
+            {loggedIn && <Redirect to='/' />}
+            {form}
+            {!loginLoading && (
+                <div className="auth-form__register-now">
+                    <small>Don't have an account?</small>
+                    <Link to="/signup" className={classes.submitLink}>
+                        <Button
+                            classes={{
+                                root: classes.submitBtn
+                            }} variant="contained">
+                            Click here to register
+                        </Button>
+                    </Link>
+                </div>
+            )}
+        </div>
+    )
+
 }
 
 const mapStateToProps = state => ({
@@ -134,4 +134,4 @@ const mapDispatchToProps = dispatch => ({
     onLogin: (email, password) => dispatch(login(email, password))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(withControlledForm(Login)));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));
