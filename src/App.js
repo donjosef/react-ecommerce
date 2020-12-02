@@ -6,7 +6,7 @@ import Cart from './components/Cart';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Signup from './components/Signup';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { CartProvider } from './context';
 import { connect } from 'react-redux'
 
@@ -19,15 +19,17 @@ function App(props) {
         <div className="App">
             <CartProvider>
                 <Layout pathname={pathname}>
-                    <Route exact path='/' component={Landing} />
-                    <Route path='/login' component={Login} />
-                    <Route path='/signup' component={Signup} />
-                    <Route path='/logout' component={Logout} />
-                    <Route path='/products' component={Products} />
-                    {props.loggedIn && (
-                        <Route path='/cart' component={Cart} />
-                    )}
-                    <Route render={() => <h1 style={{marginTop: 70, paddingLeft: 24}}>Page not found</h1>}/>
+                    <Switch>
+                        <Route exact path='/' component={Landing} />
+                        <Route path='/login' component={Login} />
+                        <Route path='/signup' component={Signup} />
+                        <Route path='/logout' component={Logout} />
+                        <Route path='/products' component={Products} />
+                        {props.loggedIn && (
+                            <Route path='/cart' component={Cart} />
+                        )}
+                        <Route render={() => <h1 style={{marginTop: 70, paddingLeft: 24}}>Page not found</h1>}/>
+                    </Switch>
                 </Layout>
             </CartProvider>
         </div>
