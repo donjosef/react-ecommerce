@@ -8,6 +8,7 @@ import Logout from './components/Logout';
 import Signup from './components/Signup';
 import { Route } from 'react-router-dom';
 import { CartProvider } from './context';
+import { connect } from 'react-redux'
 
 import './App.css';
 
@@ -23,11 +24,18 @@ function App(props) {
                     <Route path='/signup' component={Signup} />
                     <Route path='/logout' component={Logout} />
                     <Route path='/products' component={Products} />
-                    <Route path='/cart' component={Cart} />
+                    {props.loggedIn && (
+                        <Route path='/cart' component={Cart} />
+                    )}
+                    <Route render={() => <h1 style={{marginTop: 70, paddingLeft: 24}}>Page not found</h1>}/>
                 </Layout>
             </CartProvider>
         </div>
     )
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    loggedIn: state.token !== null
+})
+
+export default connect(mapStateToProps)(App);
