@@ -99,12 +99,14 @@ function FullScreenDialog(props) {
                             onClick={handleClose}>
                             <Close />
                         </IconButton>
-                        <Link className={classes.link} to='/cart'>
-                            <IconButton className={classes.btnHov} color="inherit">
-                                <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
-                                <ShoppingCart />
-                            </IconButton>
-                        </Link>
+                        {loggedIn && (
+                            <Link className={classes.link} to='/cart'>
+                                <IconButton className={classes.btnHov} color="inherit">
+                                    <span style={{ fontSize: '0.6em' }}>{quantity ? quantity : null}</span>
+                                    <ShoppingCart />
+                                </IconButton>
+                            </Link>
+                        )}
                     </Toolbar>
                 </AppBar>
                 <Grid container>
