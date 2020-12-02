@@ -14,6 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Close, ShoppingCart } from '@material-ui/icons';
 import {useCart} from '../../../../context';
+import { connect } from 'react-redux'
 
 const styles = theme => ({
     appBar: {
@@ -73,7 +74,7 @@ function FullScreenDialog(props) {
     }
 
 
-    const { product, classes, bgColor } = props;
+    const { product, classes, bgColor, loggedIn } = props;
     const {cart, addProductToCart} = useCart();
     const quantity = cart.reduce((acc, product) => acc + product.quantity, 0);
 
@@ -135,12 +136,14 @@ function FullScreenDialog(props) {
                                 variant="body1">
                                 Price: <strong>{product.price}</strong>
                             </Typography>
-                            <Button
-                                className={classes.button}
-                                size="medium"
-                                color="inherit"
-                                variant="outlined"
-                                onClick={() => addProductToCart(product)}>ADD TO CART</Button>
+                            {loggedIn && (
+                                <Button
+                                    className={classes.button}
+                                    size="medium"
+                                    color="inherit"
+                                    variant="outlined"
+                                    onClick={() => addProductToCart(product)}>ADD TO CART</Button>
+                            )}
                             <Button
                                 className={classes.button}
                                 size="medium"
@@ -167,4 +170,8 @@ function FullScreenDialog(props) {
 
 }
 
-export default withStyles(styles)(FullScreenDialog);
+const mapStateToProps = state => ({
+    loggedIn: state.token !== null
+})
+
+export default connect(mapStateToProps)(withStyles(styles)(FullScreenDialog));
